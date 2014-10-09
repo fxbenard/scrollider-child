@@ -13,37 +13,47 @@ define( 'SCROLLIDER_CHILD_VERSION', '0.1.0' );
 
 
 /*
-* Load my own woo-load-textdomain function
-* Thanks to @grappler for his help
-*/
-
+ * Load my own woo-load-textdomain function
+ * Thanks to @grappler for his help
+ */
 add_action( 'after_setup_theme', 'woo_load_textdomain', 10 );
 function woo_load_textdomain(){
-  $locale = get_locale();
-  $domain = 'woothemes';
+	$domain = 'woothemes';
 
-  if ( $loaded = load_theme_textdomain( $domain, WP_LANG_DIR . '/scrollider/' ) ) {
-    return $loaded;
-  } elseif ( $loaded = load_theme_textdomain( $domain, get_stylesheet_directory() . '/languages/' ) ) {
-    return $loaded;
-  } else {
-    load_theme_textdomain( $domain, get_template_directory() . '/languages/' );
-  }
-
-  if( is_child_theme() ) {
-    $domain = 'scrollider-child';
-    $mofile = get_stylesheet_directory() . "/languages/{$domain}-{$locale}.mo";
-    load_textdomain( $domain, $mofile );
-  }
+	if ( $loaded = load_theme_textdomain( $domain, WP_LANG_DIR . '/scrollider/' ) ) {
+		return $loaded;
+	} elseif ( $loaded = load_theme_textdomain( $domain, get_stylesheet_directory() . '/languages/' ) ) {
+		return $loaded;
+	} else {
+		load_theme_textdomain( $domain, get_template_directory() . '/languages/' );
+	}
 
 }
+/*
+ * Load child theme textdomain function
+ * Thanks to @grappler for his help
+ */
+add_action( 'after_setup_theme', 'scrollider_child_load_textdomain' );
+function scrollider_child_load_textdomain(){
+	$domain = 'scrollider-child';
+	load_theme_textdomain( $domain, get_stylesheet_directory() . '/languages/' . $domain . '/' );
+}
+
+/**
+ * Loading the parent the css.
+ */
+function scrollider_child_load_parent_css() {
+
+	wp_enqueue_style( 'scrollider-parent-style', get_template_directory_uri() . '/style.css', false, '' );
+
+}
+add_action( 'wp_enqueue_scripts', 'scrollider_child_load_parent_css' );
 
 /**
  * Load theme updater functions.
  * Thanks to @devinsays
  */
-
-function scrollider_child_theme_updater() {
-  require( get_stylesheet_directory() . '/updater/theme-updater.php' );
-}
 add_action( 'after_setup_theme', 'scrollider_child_theme_updater' );
+function scrollider_child_theme_updater() {
+	require( get_stylesheet_directory() . '/updater/theme-updater.php' );
+}
