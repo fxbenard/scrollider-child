@@ -40,6 +40,16 @@ function scrollider_child_load_textdomain(){
 }
 
 /**
+ * Loading the parent the css.
+ */
+function scrollider_child_load_parent_css() {
+
+	wp_enqueue_style( 'scrollider-parent-style', get_template_directory_uri() . '/style.css', false, '' );
+
+}
+add_action( 'wp_enqueue_scripts', 'scrollider_child_load_parent_css' );
+
+/**
  * Load theme updater functions.
  * Thanks to @devinsays
  */
