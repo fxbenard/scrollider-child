@@ -1,0 +1,24 @@
+/*
+Theme Name: Scrollider Child
+Description: Scrollider Child Theme and in French
+Author: fxbenard
+Template: scrollider
+Version: 1.0
+Text Domain: scrollider-child
+Domain Path: languages
+Tags: scrollider, woothemes, french
+*/
+
+@import url("../scrollider/style.css");
+
+/*
+
+INSTRUCTIONS:
+
+Please use the supplied custom.css for your customizations.
+This file should not have any CSS in it.
+
+Merci d'utiliser le fichier custom.css pour vos personnalisations.
+Ce fichier ne doit contenir aucun CSS.
+
+*/
